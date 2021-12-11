@@ -1,24 +1,4 @@
-class Model {
-    constructor() {
-        this.todos = [
-            {id: 1, text: 'Plant a tree'},
-            {id: 2, text: 'Do homework'},
-        ]
-    }
-
-    handleListChange(handler) {
-        this.listChanged = handler;
-    }
-
-    addTodo(newTodo) {
-        const newId = this.todos.length + 1;
-        this.todos.push({id: newId, text: newTodo})
-
-        this.listChanged(this.todos);
-    }   
-}
-
-class View { 
+class View {
     constructor() {
         this.app = this.getElement('#root');
         this.container = this.createElement('div', 'container');
@@ -62,16 +42,29 @@ class View {
             this.container.appendChild(p);
         }
 
-        list.map(item => {
-            this.div = this.createElement('div');
-            this.span = this.createElement('span');
-            this.checkbox = this.createElement('input');
-            this.checkbox.setAttribute('type', 'checkbox');
-    
-            this.div.appendChild(this.span);
-            this.div.appendChild(this.checkbox);
-            this.container.appendChild(this.div);
-            this.span.innerHTML = item.text;
+        list.map(todo => {
+            const li = this.createElement('li');
+            const checkbox = this.createElement('input');
+            const span = this.createElement('span');
+            const deleteButton = this.createElement('button');
+            
+            li.setAttribute('id', todo.id);
+            checkbox.setAttribute('type', 'checkbox');
+            checkbox.checked = todo.complete;
+            deleteButton.innerHTML = 'Delete';
+
+            li.appendChild(checkbox);
+            li.appendChild(span);
+            li.appendChild(deleteButton);
+            this.container.appendChild(li);
+
+            if (todo.complete) {
+                const strike = this.createElement('s');
+                strike.innerHTML = todo.text
+                span.appendChild(strike);
+            } else {
+                span.innerHTML = todo.text;
+            }
         });
 
         this.app.appendChild(this.container);
@@ -84,25 +77,24 @@ class View {
             this._restInput(); 
         });
     }
+
+    bindToggleCheckbox(handler) {
+        this.container.addEventListener('click', e => {
+            if (e.target.type === 'checkbox') {
+                const id = parseInt(e.target.parentElement.id);
+                handler(id);
+            }
+        });
+    }
+
+    bindDelete(handler) {
+        this.container.addEventListener('click', e => {
+            if (e.target.type === 'submit') {
+                const id = parseInt(e.target.parentElement.id);
+                handler(id)
+            }
+        });
+    }
 }
 
-class Controller {
-    constructor(model, view) {
-        this.model = model;
-        this.view = view;
-
-        this.view.displayList(this.model.todos);
-        this.view.bindSubmit(this.handleSubmit);
-        this.model.handleListChange(this.handleTodosChange);
-    }
-
-    handleSubmit = text => {
-        this.model.addTodo(text);
-    }
-
-    handleTodosChange = todos => {
-        this.view.displayList(todos)
-    }
-}
-
-const app = new Controller(new Model(), new View());
+export default View;

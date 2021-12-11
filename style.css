@@ -1,3 +1,7 @@
+#root {
+    text-align: center;
+}
+
 form {
     display: flex;
     align-items: center;
