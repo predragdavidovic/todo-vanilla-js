@@ -10,6 +10,9 @@ class View {
         this.form.appendChild(this.input);  
         this.form.appendChild(this.button);
         this.app.appendChild(this.form);
+
+        this._temporaryState = '';
+        this._initTemporaryState();
     }
 
     createElement(tagName, className) {
@@ -50,6 +53,8 @@ class View {
             
             li.setAttribute('id', todo.id);
             checkbox.setAttribute('type', 'checkbox');
+            span.setAttribute('contenteditable', true);
+            span.setAttribute('class', 'writable');
             checkbox.checked = todo.complete;
             deleteButton.innerHTML = 'Delete';
 
@@ -70,6 +75,14 @@ class View {
         this.app.appendChild(this.container);
     }
 
+    _initTemporaryState() {
+        this.container.addEventListener('input', e => {
+            if (e.target.className === 'writable') {
+                this._temporaryState = e.target.innerText;
+            }
+        });
+    }
+
     bindSubmit(handler) {
         this.button.addEventListener('click', e => {
             e.preventDefault();
@@ -77,6 +90,17 @@ class View {
             this._restInput(); 
         });
     }
+    
+    bindEdit(handler) {
+        this.container.addEventListener('focusout', e => {
+            if (this._temporaryState) {
+                const id = parseInt(e.target.parentElement.id);
+                handler(id, this._temporaryState);
+                this._temporaryState = '';
+            }
+        });
+    }
+
 
     bindToggleCheckbox(handler) {
         this.container.addEventListener('click', e => {

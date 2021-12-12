@@ -7,6 +7,7 @@ class Controller {
         this.view.bindSubmit(this.handleSubmit);
         this.view.bindToggleCheckbox(this.handleToggleCheckbox);
         this.view.bindDelete(this.handleDelete);
+        this.view.bindEdit(this.handleEdit);
         this.model.handleListChange(this.handleTodosChange);
     }
 
@@ -24,6 +25,10 @@ class Controller {
 
     handleDelete = id => {
         this.model.handleDelete(id);
+    }
+
+    handleEdit = (id, value) => {
+        this.model.handleEdit(id, value);
     }
 }
 

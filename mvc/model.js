@@ -15,7 +15,7 @@ class Model {
             return;
         }
         const newId = this.todos.length + 1;
-        this.todos.push({id: newId, text: newTodo})
+        this.todos.push({id: newId, text: newTodo, complete: false})
 
         this.listChanged(this.todos);
     }   
@@ -28,6 +28,20 @@ class Model {
 
     handleDelete(id) {
         this.todos = this.todos.filter(todo => todo.id !== id);
+        this.listChanged(this.todos);
+    }
+
+    handleEdit(id, value) {
+        this.todos = this.todos.map(todo => {
+            if (todo.id === id) {
+                return {
+                    ...todo,
+                    text: value
+                };
+            } else {
+                return todo;
+            }
+        });
         this.listChanged(this.todos);
     }
 }
