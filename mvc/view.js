@@ -2,14 +2,14 @@ class View {
     constructor() {
         this.app = this.getElement('#root');
         this.container = this.createElement('div', 'container');
-        this.form = this.createElement('form');
+        const form = this.createElement('form');
         this.input = this.createElement('input');
         this.button = this.createElement('button');
         this.button.innerHTML = 'Submit';
 
-        this.form.appendChild(this.input);  
-        this.form.appendChild(this.button);
-        this.app.appendChild(this.form);
+        form.appendChild(this.input);  
+        form.appendChild(this.button);
+        this.app.appendChild(form);
 
         this._temporaryState = '';
         this._initTemporaryState();

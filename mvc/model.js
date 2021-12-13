@@ -1,13 +1,15 @@
 class Model {
     constructor() {
-        this.todos = [
-            {id: 1, text: 'Plant a tree', complete: false},
-            {id: 2, text: 'Do homework', complete: false},
-        ]
+        this.todos = JSON.parse(localStorage.getItem('todos')) || [];
     }
 
     handleListChange(handler) {
         this.listChanged = handler;
+    }
+
+    _update(todos) {
+        this.listChanged(todos);
+        localStorage.setItem('todos', JSON.stringify(todos));
     }
 
     addTodo(newTodo) {
@@ -15,20 +17,19 @@ class Model {
             return;
         }
         const newId = this.todos.length + 1;
-        this.todos.push({id: newId, text: newTodo, complete: false})
-
-        this.listChanged(this.todos);
+        this.todos.push({id: newId, text: newTodo, complete: false});
+        this._update(this.todos);
     }   
 
     toggleTodo(id) {
         this.todos = this.todos.map(todo => 
-            todo.id === id ? {...todo, complete: !todo.complete} : todo)
-        this.listChanged(this.todos);
+            todo.id === id ? {...todo, complete: !todo.complete} : todo);
+        this._update(this.todos);
     }
 
     handleDelete(id) {
         this.todos = this.todos.filter(todo => todo.id !== id);
-        this.listChanged(this.todos);
+        this._update(this.todos);
     }
 
     handleEdit(id, value) {
@@ -42,7 +43,7 @@ class Model {
                 return todo;
             }
         });
-        this.listChanged(this.todos);
+        this._update(this.todos);
     }
 }
 

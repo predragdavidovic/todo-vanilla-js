@@ -15,10 +15,6 @@ class Controller {
         this.model.addTodo(text);
     }
 
-    handleTodosChange = todos => {
-        this.view.displayList(todos)
-    }
-
     handleToggleCheckbox = id => {
         this.model.toggleTodo(id);
     }
@@ -29,6 +25,10 @@ class Controller {
 
     handleEdit = (id, value) => {
         this.model.handleEdit(id, value);
+    }
+
+    handleTodosChange = todos => {
+        this.view.displayList(todos);
     }
 }
 
