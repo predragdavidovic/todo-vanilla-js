@@ -16,7 +16,7 @@ class Model {
         if (!newTodo.length) {
             return;
         }
-        const newId = this.todos.length + 1;
+        const newId = Date.now();
         this.todos.push({id: newId, text: newTodo, complete: false});
         this._update(this.todos);
     }   

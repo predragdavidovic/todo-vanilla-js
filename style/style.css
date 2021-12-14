@@ -1,0 +1,122 @@
+body {
+    padding: 80px;
+    background: linear-gradient(to right, #585ce5 0%, #f77376 100%);
+}
+
+.noItems {
+    text-align: center;
+    color: #858596;
+}
+
+#root {
+    display: flex;
+    flex-direction: column;
+    width: 25%;
+    margin: 0 auto;
+    text-align: left;
+    background: #fefdff;
+    border-radius: 5px;
+    padding: 0 0 20px 0;
+    color: #858596;
+}
+
+.head {
+    display: flex;
+    padding: 20px 10px 10px 10px;
+    justify-content: space-between;
+    background: #f4f4f9;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+}
+
+.headLeft {
+    display: flex;
+    flex-direction: column;
+}
+
+.headRight {
+    display: flex;
+    flex-direction: column;
+}
+
+.day {
+    font-weight: 600;
+    font-size: 24px;
+    color: #6b6ce9;
+}
+
+.date {
+    color: #b2b1c2;
+}
+
+form {
+    display: flex;
+    height: 30px;
+    border: 0;
+    justify-content: center;
+    align-items: center;
+    padding: 0 10px 20px 10px;
+    background: #f4f4f9;
+}
+
+.addInput {
+    border: 1px solid #898bad;
+    width: 88%;
+    height: 30px;
+    margin-right: 10px;
+    border-radius: 5px;
+    color: #858596;
+    font-size: 14px;
+    padding-left: 10px;;
+}
+.addInput:focus {
+    outline: none;
+}
+
+.addButton {
+    width: 40px;
+    height: 40px;
+    border-radius: 20px;
+    font-size: 20px;
+    border: 0;
+    background-color: #fc6a6b;
+    color: #ffffff;
+}
+
+.addButton:hover {
+    cursor: pointer;
+    background-color: #f36061;
+}
+
+.container {
+    list-style-type: none;
+    text-align: center;
+}
+
+li {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+    border-bottom: 1px solid #bfcad1;
+}
+
+li:hover {
+    cursor: pointer;
+}
+
+.holder {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.writable {
+    padding-left: 5px;
+}
+
+.rest {
+    padding-top: 50px;
+}
+img.tresh:hover {
+   cursor: pointer;
+}
