@@ -1,5 +1,5 @@
 # todo-vanilla-js
-Simplest todo app in vannila JS.
+Simplest todo app in vannila JS created in MVC architectural pattern.
 
 
 Create, Read, Update and Delete functionalities 
